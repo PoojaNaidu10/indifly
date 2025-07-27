@@ -12,15 +12,13 @@ const addUser = async function (req, res) {
         let mobileNo = req.body.mobile_no
 
         if (!(/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/.test(mobileNo))) {
-            res.status(400).send({ status: false, msg: "Mobile no is not valid" })
-            return
+            return apiResponse.sendResponse({ message: "Mobile no is not valid" }, 400, res)
         }
 
         let emailId = req.body.email_id
 
         if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailId))) {
-            res.status(400).send({ status: false, msg: "Email id is not valid" })
-            return
+            return apiResponse.sendResponse({ message: "Email id is not valid" }, 400, res)
         }
         await user.save()
         return apiResponse.sendResponse({ message: "User added successfully" }, 200, res)
@@ -46,15 +44,13 @@ const updateUser = async function (req, res) {
         let mobileNo = req.body.mobile_no
 
         if (!(/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/.test(mobileNo))) {
-            res.status(400).send({ status: false, msg: "Mobile no is not valid" })
-            return
+            return apiResponse.sendResponse({ message: "Mobile no is not valid" }, 400, res)
         }
 
         let emailId = req.body.email_id
 
         if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailId))) {
-            res.status(400).send({ status: false, msg: "Email id is not valid" })
-            return
+            return apiResponse.sendResponse({ message: "Email id is not valid" }, 400, res)
         }
 
         let userUpdateObject = await User.updateOne({ "_id":new ObjectId(userId) }, { $set: req.body })
